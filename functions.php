@@ -458,7 +458,7 @@ class WPClientReference {
    * @return void
    */
   public function load_scripts_styles(){
-    wp_enqueue_style('wpclientref', plugins_url(null, __FILE__) . '/views/wpclientref.css', null, null, 'all');
+    wp_enqueue_style('wpclientref', $this->get_template_url('wpclientref.css'), null, null, 'all');
     wp_enqueue_script('post');
     return;
   }
@@ -476,8 +476,41 @@ class WPClientReference {
         $template = 'single.php';
       }
     }
-    include WPCLIENTREF_VIEWS_DIR . $template;
+    include $this->get_template_path($template, false);
     return;
+  }
+
+  /**
+   * Determine whether $file should be loaded from the theme or plugin directory
+   * @param str $file The filename to look for
+   * @return bool
+   * @uses trailingslashit()
+   */
+  protected function load_file_from_theme($file){
+    return file_exists(trailingslashit(TEMPLATEPATH) . 'wpclientref-views/' . basename($file));
+  }
+
+  /**
+   * Check for a file within the theme's directory. If it exists, use that rather than the default views/{filename}
+   * @param str $file The filename to look for
+   * @param bool $path_only Return only the path or include the file at the end?
+   * @return str
+   * @uses trailingslashit()
+   */
+  protected function get_template_path($file, $path_only=false){
+    $path = trailingslashit(TEMPLATEPATH) . 'wpclientref-views/';
+    return ( $this->load_file_from_theme($file) ? $path : WPCLIENTREF_VIEWS_DIR ) . ( $path_only ? '' : $file );
+  }
+
+  /**
+   * Similar to WPClientReference::get_template_path() but return a URL instead of a system path
+   * @param str $file The filename to look for
+   * @param bool $path_only Return only the path or include the file at the end?
+   * @return str
+   * @uses trailingslashit()
+   */
+  protected function get_template_url($file, $path_only=false){
+    return trailingslashit(( $this->load_file_from_theme($file) ? get_bloginfo('template_url') : plugins_url(null, __FILE__) . '/views/' )) . ( $path_only ? '' : $file );
   }
 }
 

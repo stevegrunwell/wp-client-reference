@@ -20,7 +20,8 @@ setup_postdata($post);
       </div>
     </div>
 
-    <?php include WPCLIENTREF_VIEWS_DIR . 'sidebar.php'; ?>
+    <?php include $this->get_template_path('sidebar.php'); ?>
 
+    <br class="clear" />
   </div>
 </div>

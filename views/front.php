@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <?php include WPCLIENTREF_VIEWS_DIR . 'sidebar.php'; ?>
+    <?php include $this->get_template_path('sidebar.php'); ?>
 
   </div>
 </div>
