@@ -456,7 +456,15 @@ class WPClientReference {
       'sort_column' => 'menu_order',
       'title_li' => null
     );
-    return wp_list_pages($opts);
+    $pages = wp_list_pages($opts);
+
+    // This is awfully hackish but replace the links to stay in the admin area
+    if( preg_match_all('/\<li.+page-item-([0-9]+).+href="(.[^"]+)"/i', $pages, $matches) ){
+      foreach( $matches['2'] as $k=>$v ){
+        $pages = str_replace(sprintf('"%s"', $v), sprintf('?page=wpclientref_articles&article_id=%d', $matches['1'][$k]), $pages);
+      }
+    }
+    return $pages;
   }
 
   /**
