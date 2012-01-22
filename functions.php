@@ -428,10 +428,40 @@ class WPClientReference {
   }
 
   /**
+   * Get article content
+   * @return object
+   */
+  public function get_articles(){
+    $opts = array(
+      'numberposts' => 10,
+      'offset' => 0,
+      'post_status' => 'publish',
+      'post_type' => $this->settings['post_type']
+    );
+    return get_posts($opts);
+  }
+
+  /**
+   * Get a list of all articles
+   * @return str
+   * @uses wp_list_pages
+   */
+  public function list_articles(){
+    $opts = array(
+      'post_type' => $this->settings['post_type'],
+      'echo' => false,
+      'sort_column' => 'menu_order',
+      'title_li' => null
+    );
+    return wp_list_pages($opts);
+  }
+
+  /**
    * Load the front page of the articles menu (views/front.php)
    * @return void
    */
   public function load_front_page(){
+    wp_enqueue_script('post');
     include WPCLIENTREF_VIEWS_DIR . 'front.php';
     return;
   }
