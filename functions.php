@@ -59,7 +59,7 @@ class WPClientReference {
   public function get_default_settings(){
     return array(
       'menu_page_title' => 'Knowledgebase',
-      'menu_position' => 50,
+      'menu_position' => 70,
       'post_type' => 'client_reference'
     );
   }
@@ -350,7 +350,7 @@ class WPClientReference {
    * @uses add_menu_page()
    */
   public function register_articles_menu(){
-    add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'), '', 70);
+    add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'), '', $this->settings['menu_position']);
     //add_submenu_page('wpclientref_articles', 'Help', 'Help Articles', 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'));
   }
 
