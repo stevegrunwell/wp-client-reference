@@ -50,6 +50,7 @@ class WPClientReference {
    * Get the default plugin settings
    *
    * Settings:
+   * hide_menu: (bool) Hide the client-facing menu
    * menu_page_title: (string) The title of the (client-facing) top-level menu page
    * menu_position: (int) The menu's position; lower numbers = higher in the list
    * post_type: (string) The slug for the WordPress custom post type
@@ -58,6 +59,7 @@ class WPClientReference {
    */
   public function get_default_settings(){
     return array(
+      'hide_menu' => 0,
       'menu_page_title' => 'Knowledgebase',
       'menu_position' => 70,
       'post_type' => 'client_reference'
@@ -225,6 +227,7 @@ class WPClientReference {
     add_settings_section('wpclientref_settings_main', 'Basic Settings', array(&$this, 'load_settings_view_main'), 'wpclientref_settings_page');
     add_settings_field('menu_page_title', 'Menu page title', array(&$this, 'setting_text_menu_page_title'), 'wpclientref_settings_page', 'wpclientref_settings_main');
     add_settings_field('menu_position', 'Menu position', array(&$this, 'setting_text_menu_position'), 'wpclientref_settings_page', 'wpclientref_settings_main');
+    add_settings_field('hide_menu', 'Hide menu', array(&$this, 'setting_checkbox_hide_menu'), 'wpclientref_settings_page', 'wpclientref_settings_main');
     add_settings_section('wpclientref_settings_advanced', 'Advanced Settings', array(&$this, 'load_settings_view_advanced'), 'wpclientref_settings_page');
     add_settings_field('post_type', 'Custom post type', array(&$this, 'setting_text_post_type'), 'wpclientref_settings_page', 'wpclientref_settings_advanced');
   }
@@ -257,6 +260,8 @@ class WPClientReference {
   public function __call($function, $args){
     if( preg_match('/^setting_text_(.+)/i', $function, $match) ){
       $this->setting_text_input($match['1']);
+    } else if( preg_match('/^setting_checkbox_(.+)/i', $function, $match) ){
+      $this->setting_checkbox_input($match['1']);
     } else {
       // Invalid method call
       // TODO: Throw a proper error
@@ -272,7 +277,34 @@ class WPClientReference {
    */
   public function setting_text_input($key){
     echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="text" value="%s" />', $key, $key, $this->settings[$key]);
-    return true;
+    return;
+  }
+
+  /**
+   * Create a checkbox input for the settings page
+   * @param str $key The setting key
+   * @param str $label Contents of a <label> element to wrap around the checkbox
+   * @return void
+   */
+  public function setting_checkbox_input($key, $label=''){
+    if( $label != '' ){
+      echo '<label>';
+    }
+    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="checkbox" value="1" %s" />', $key, $key, ( isset($this->settings[$key]) && $this->settings[$key] ? 'checked="checked"' : '' ));
+    if( $label != '' ){
+      echo sprintf(' %s</label>', $label);
+    }
+    return;
+  }
+
+  /**
+   * Create a checkbox for settings[hide_menu]
+   * @return void
+   * @uses WPClientReference::setting_checkbox_input()
+   */
+  public function setting_checkbox_hide_menu(){
+    $this->setting_checkbox_input('hide_menu', sprintf('Hide the "%s" menu item', $this->settings['menu_page_title']));
+    return;
   }
 
   /**
@@ -289,9 +321,10 @@ class WPClientReference {
       'messages' => array()
     );
 
-    $save = array();
+    // By default, just re-save the existing $this->settings. We'll override this with each successful validation
+    $save = $this->settings;
 
-    // Menu page title
+    // menu_page_title
     $post['menu_page_title'] = trim(filter_var($post['menu_page_title'], FILTER_SANITIZE_STRING));
     if( $post['menu_page_title'] == '' ){
       $status['messages'][] = 'Menu page title cannot be empty';
@@ -299,7 +332,18 @@ class WPClientReference {
       $save['menu_page_title'] = $post['menu_page_title'];
     }
 
-    // Post type
+    // menu_position
+    $post['menu_position'] = intval($post['menu_position']);
+    if( $post['menu_position'] < 0 ){
+      $status['messages'][] = 'Menu position cannot be negative';
+    } else {
+      $save['menu_position'] = $post['menu_position'];
+    }
+
+    // hide_menu
+    $save['hide_menu'] = ( isset($post['hide_menu']) && intval($post['hide_menu']) > 0 );
+
+    // post_type
     $post['post_type'] = preg_replace('/[^a-z0-9_]/i', '', strtolower($post['post_type']));
     if( strlen($post['post_type']) > 20 ){
       $status['messages'][] = 'Post type name cannot be longer than 20 characters';
@@ -316,7 +360,7 @@ class WPClientReference {
     }
     update_option($this->get_settings_status_key(), $status);
 
-    return $post;
+    return $save;
   }
 
   /**
@@ -350,8 +394,11 @@ class WPClientReference {
    * @uses add_menu_page()
    */
   public function register_articles_menu(){
-    add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'), '', $this->settings['menu_position']);
-    //add_submenu_page('wpclientref_articles', 'Help', 'Help Articles', 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'));
+    if( !$this->settings['hide_menu'] ){
+      add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'), '', $this->settings['menu_position']);
+      //add_submenu_page('wpclientref_articles', 'Help', 'Help Articles', 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'));
+    }
+    return;
   }
 
   /**
