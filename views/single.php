@@ -5,16 +5,18 @@
  * @subpackage WP Client Reference
  * @version 0.4
  */
+
+setup_postdata($post);
 ?>
 
 <div class="wrap columns-2">
-  <h2><?php echo $this->settings['menu_page_title']; ?></h2>
+  <h2><?php the_title(); ?></h2>
 
   <div id="poststuff" class="metabox-holder has-right-sidebar">
 
     <div id="post-body">
       <div id="post-body-content">
-        <p>Foo bar</p>
+        <?php the_content(); ?>
       </div>
     </div>
 

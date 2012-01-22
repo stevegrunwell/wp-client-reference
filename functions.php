@@ -424,24 +424,10 @@ class WPClientReference {
    */
   public function register_articles_menu(){
     if( !$this->settings['hide_menu'] ){
-      add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'), '', $this->settings['menu_position']);
+      add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_template'), '', $this->settings['menu_position']);
       //add_submenu_page('wpclientref_articles', 'Help', 'Help Articles', 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'));
     }
     return;
-  }
-
-  /**
-   * Get article content
-   * @return object
-   */
-  public function get_articles(){
-    $opts = array(
-      'numberposts' => 10,
-      'offset' => 0,
-      'post_status' => 'publish',
-      'post_type' => $this->settings['post_type']
-    );
-    return get_posts($opts);
   }
 
   /**
@@ -478,14 +464,21 @@ class WPClientReference {
   }
 
   /**
-   * Load the front page of the articles menu (views/front.php)
+   * View controller
    * @return void
+   * @uses get_post()
    */
-  public function load_front_page(){
-    include WPCLIENTREF_VIEWS_DIR . 'front.php';
+  public function load_template(){
+    global $post;
+    $template = 'front.php';
+    if( isset($_GET['article_id']) ){
+      if( $post = get_post(intval($_GET['article_id'])) ){
+        $template = 'single.php';
+      }
+    }
+    include WPCLIENTREF_VIEWS_DIR . $template;
     return;
   }
-
 }
 
 ?>
