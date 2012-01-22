@@ -266,9 +266,7 @@ class WPClientReference {
     } else if( preg_match('/^setting_checkbox_(.+)/i', $function, $match) ){
       $this->setting_checkbox_input($match['1']);
     } else {
-      // Invalid method call
-      // TODO: Throw a proper error
-      die('Invalid method call');
+      trigger_error(sprintf('Invalid method call: WPClientReference::%s', $function), E_USER_WARNING);
     }
     return;
   }
