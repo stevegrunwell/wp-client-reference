@@ -228,7 +228,7 @@ class WPClientReference {
     add_settings_field('menu_page_title', 'Menu page title', array(&$this, 'setting_text_menu_page_title'), 'wpclientref_settings_page', 'wpclientref_settings_main');
     add_settings_field('menu_position', 'Menu position', array(&$this, 'setting_text_menu_position'), 'wpclientref_settings_page', 'wpclientref_settings_main');
     add_settings_field('hide_menu', 'Hide menu', array(&$this, 'setting_checkbox_hide_menu'), 'wpclientref_settings_page', 'wpclientref_settings_main');
-    add_settings_section('wpclientref_settings_advanced', 'Advanced Settings', array(&$this, 'load_settings_view_advanced'), 'wpclientref_settings_page');
+    add_settings_section('wpclientref_settings_advanced', 'Change Custom Post Type', array(&$this, 'load_settings_view_advanced'), 'wpclientref_settings_page');
     add_settings_field('post_type', 'Custom post type', array(&$this, 'setting_text_post_type'), 'wpclientref_settings_page', 'wpclientref_settings_advanced');
   }
 
@@ -246,7 +246,7 @@ class WPClientReference {
    * @return void
    */
   public function load_settings_view_advanced(){
-    echo '<p><em>These settings should only be changed if you know what you\'re doing!</em></p>';
+    echo sprintf('<p>If there are collisions with the custom post type of <code>%s</code> you can change it here:</p>', $this->settings['post_type']);
     return;
   }
 
@@ -272,27 +272,37 @@ class WPClientReference {
 
   /**
    * Create a basic text input for the settings page
+   *
+   * Available $args:
+   * class: (str) CSS class to add to the input
+   *
    * @param str $key The setting key
+   * @param array $args Additional arguments
    * @return void
    */
-  public function setting_text_input($key){
-    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="text" value="%s" />', $key, $key, $this->settings[$key]);
+  public function setting_text_input($key, $args=array()){
+    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="text" value="%s" class="%s" />', $key, $key, $this->settings[$key], ( isset($args['class']) ? $args['class'] : '' ));
     return;
   }
 
   /**
    * Create a checkbox input for the settings page
+   *
+   * Available $args:
+   * class: (str) CSS class to add to the input[type="checkbox"]
+   * label: (str) Contents of a <label> element to wrap around the checkbox
+   *
    * @param str $key The setting key
    * @param str $label Contents of a <label> element to wrap around the checkbox
    * @return void
    */
-  public function setting_checkbox_input($key, $label=''){
-    if( $label != '' ){
+  public function setting_checkbox_input($key, $args=array()){
+    if( isset($args['label']) && $args['label'] != '' ){
       echo '<label>';
     }
-    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="checkbox" value="1" %s" />', $key, $key, ( isset($this->settings[$key]) && $this->settings[$key] ? 'checked="checked"' : '' ));
-    if( $label != '' ){
-      echo sprintf(' %s</label>', $label);
+    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="checkbox" value="1" class="%s" %s />', $key, $key, ( isset($args['class']) ? $args['class'] : '' ), ( isset($this->settings[$key]) && $this->settings[$key] ? 'checked="checked"' : '' ));
+    if( isset($args['label']) && $args['label'] != '' ){
+      echo sprintf(' %s</label>', $args['label']);
     }
     return;
   }
@@ -303,7 +313,23 @@ class WPClientReference {
    * @uses WPClientReference::setting_checkbox_input()
    */
   public function setting_checkbox_hide_menu(){
-    $this->setting_checkbox_input('hide_menu', sprintf('Hide the "%s" menu item', $this->settings['menu_page_title']));
+    $args = array(
+      'label' => sprintf('Hide the "%s" menu item', $this->settings['menu_page_title'])
+    );
+    $this->setting_checkbox_input('hide_menu', $args);
+    return;
+  }
+
+  /**
+   * Create the text input for settings[post_type]
+   * @return void
+   * @uses WPClientReference::setting_text_input()
+   */
+  public function setting_text_post_type(){
+    $args = array(
+      'class' => 'code'
+    );
+    $this->setting_text_input('post_type', $args);
     return;
   }
 
