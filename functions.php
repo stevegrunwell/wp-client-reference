@@ -43,6 +43,9 @@ class WPClientReference {
     add_action('admin_init', array(&$this, 'register_settings'));
 
     add_action('admin_menu', array(&$this, 'register_articles_menu'));
+    if( isset($_GET['page']) && $_GET['page'] == 'wpclientref_articles' ){
+      $this->load_scripts_styles();
+    }
     return;
   }
 
@@ -457,11 +460,20 @@ class WPClientReference {
   }
 
   /**
+   * Load scripts and styles for the articles view
+   * @return void
+   */
+  public function load_scripts_styles(){
+    wp_enqueue_style('wpclientref', plugins_url(null, __FILE__) . '/views/wpclientref.css', null, null, 'all');
+    wp_enqueue_script('post');
+    return;
+  }
+
+  /**
    * Load the front page of the articles menu (views/front.php)
    * @return void
    */
   public function load_front_page(){
-    wp_enqueue_script('post');
     include WPCLIENTREF_VIEWS_DIR . 'front.php';
     return;
   }
