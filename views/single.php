@@ -11,6 +11,7 @@ setup_postdata($post);
 
 <div class="wrap columns-2">
   <h2><?php the_title(); ?></h2>
+  <?php echo $this->get_breadcrumbs(); ?>
 
   <div id="poststuff" class="metabox-holder has-right-sidebar">
 

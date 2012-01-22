@@ -512,6 +512,22 @@ class WPClientReference {
   protected function get_template_url($file, $path_only=false){
     return trailingslashit(( $this->load_file_from_theme($file) ? get_bloginfo('template_url') : plugins_url(null, __FILE__) . '/views/' )) . ( $path_only ? '' : $file );
   }
+
+  /**
+   * Create a list of breadcrumbs for articles
+   * @return str
+   * @uses get_the_title()
+   */
+  public function get_breadcrumbs(){
+    global $post;
+    $breadcrumbs = '<ul class="subsubsub breadcrumbs"><li><a href="?page=wpclientref_articles">Home</a> &raquo; ';
+    $ancestors = array_reverse($post->ancestors);
+    foreach( $ancestors as $ancestor ){
+      $breadcrumbs .= sprintf('<li><a href="?page=wpclientref_articles&article_id=%d">%s</a> %s ', $ancestor, get_the_title($ancestor), '&raquo;</li>');
+    }
+    $breadcrumbs .= get_the_title() . '</ul>';
+    return $breadcrumbs;
+  }
 }
 
 ?>
