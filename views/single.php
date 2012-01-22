@@ -14,14 +14,15 @@ setup_postdata($post);
 
   <div id="poststuff" class="metabox-holder has-right-sidebar">
 
+    <?php include $this->get_template_path('sidebar.php'); ?>
+
     <div id="post-body">
       <div id="post-body-content">
         <?php the_content(); ?>
       </div>
     </div>
 
-    <?php include $this->get_template_path('sidebar.php'); ?>
+    <div class="clear"></div>
 
-    <br class="clear" />
   </div>
 </div>
