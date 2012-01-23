@@ -12,13 +12,17 @@ Create a reference guide for clients right in the WordPress administration area.
 == Description ==
 
 It's common practice for digital agencies to build a WordPress site/theme then simply hand it off to the client for day-to-day updating. The developers work hard to strike a balance between replicating the designer's vision and making the theme easy for the client to use. As the design becomes more complex the developer faces questions: Will the client remember to wrap this in a `<blockquote>`? Can we count on the content manager remembering to add `class="btn"` to that link?
-  
+
 It can be equally frustrating from the client side. You don't want to deal with learning HTML but you want your content to look just as well formatted as the stuff the agency put in at launch. The agency sent over a formatting/style guide but it never seems to be around when you need it.
 
 WP Client Reference attempts to solve these problems by embedding client documentation directly into WordPress. Now agencies can include style guides, tutorials, FAQs, and more without worrying about content managers on the client side not knowing how to format that complicated call-to-action. It's also useful for any type of team to keep track of information (with versioning) right within WordPress.
 
 
 == Frequently Asked Questions ==
+
+= How do I customize the article views? =
+
+WP Client Reference looks for a `wpclientref-views` directory in your current theme's directory. If it finds `front.php` (the default view), `single.php` (a single article), or `wpclientref.css` (article styles), it will use those files instead of the plugin's defaults.
 
 = Can I change the name of the custom post type? =
 
