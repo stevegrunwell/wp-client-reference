@@ -241,7 +241,6 @@ class WPClientReference {
    * @return void
    */
   public function load_settings_view_main(){
-    echo '<p>Main settings will go here</p>';
     return;
   }
 
