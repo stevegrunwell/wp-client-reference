@@ -15,7 +15,6 @@ WP Client Reference attempts to solve these problems by embedding client documen
 
 TODO:
 
-* Finish `WPClientReference::get_article_column_content()`
 * Fix any outstanding issues in [Github issue tracker](https://github.com/stevegrunwell/WP-Client-Reference/issues/)
 
 **Version 0.5**
@@ -29,3 +28,4 @@ TODO:
 * Import/export of articles
 * Customize `WPClientReference::get_breadcrumbs()` output
 * Ability to remove all articles upon uninstall
+* Customize the columns in the article list (`WPClientReference::get_article_column_content()`)

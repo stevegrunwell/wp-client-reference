@@ -31,13 +31,13 @@ class WPClientReference {
    */
   public function __construct(){
     $this->settings = get_option('wpclientref_settings');
-    $this->register_category_taxonomy();
-    $this->register_tag_taxonomy();
+    #$this->register_category_taxonomy();
+    #$this->register_tag_taxonomy();
     $this->register_post_type();
 
     // Optional but it cleans up the "Help Articles" view
     add_filter(sprintf('manage_%s_posts_columns', $this->settings['post_type']), array(&$this, 'set_article_columns'));
-    add_action('manage_posts_custom_column', 'get_article_column_content', 10, 2);
+    //add_action('manage_posts_custom_column', array(&$this, 'get_article_column_content'));
 
     add_action('admin_menu', array(&$this, 'add_settings_page'));
     add_action('admin_init', array(&$this, 'register_settings'));
@@ -170,7 +170,7 @@ class WPClientReference {
     $cols = array(
       'cb' => '<input type="checkbox" />',
       'title' => 'Title',
-      'article_excerpt' => 'Article Excerpt',
+      //'article_excerpt' => 'Article Excerpt',
       'date' => 'Date'
     );
     return $cols;
@@ -178,23 +178,14 @@ class WPClientReference {
 
   /**
    * Populate the columns we set in $this->set_article_columns()
-   * TODO: Make this method work (low priority)
    * @param str $col The column name
    * @param int $id The post ID
    * @return void
    */
   public function get_article_column_content($col, $id){
     switch($col):
-      case 'title':
-        the_title();
-        break;
-
       case 'article_excerpt':
         the_excerpt();
-        break;
-
-      case 'date':
-
         break;
     endswitch;
     return;
