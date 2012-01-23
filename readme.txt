@@ -18,6 +18,13 @@ It can be equally frustrating from the client side. You don't want to deal with 
 WP Client Reference attempts to solve these problems by embedding client documentation directly into WordPress. Now agencies can include style guides, tutorials, FAQs, and more without worrying about content managers on the client side not knowing how to format that complicated call-to-action. It's also useful for any type of team to keep track of information (with versioning) right within WordPress.
 
 
+== Installation ==
+
+1. Upload the `wp-client-reference` plugin directory to `/wp-content/plugins/`
+2. Activate the plugin
+3. (Optional) Adjust the plugin settings on the "Options" page under the "Help Articles" menu item
+
+
 == Frequently Asked Questions ==
 
 = How do I customize the article views? =
@@ -27,10 +34,3 @@ WP Client Reference looks for a `wpclientref-views` directory in your current th
 = Can I change the name of the custom post type? =
 
 Yes! If you need to change the name of the custom post type (default is `client_reference`) you can do so in the "Article Options" page. This will also update the posts in `wp_posts` accordingly.
-
-
-== Installation ==
-
-1. Upload the `wp-client-reference` plugin directory to `/wp-content/plugins/`
-2. Activate the plugin
-3. (Optional) Adjust the plugin settings on the "Options" page under the "Help Articles" menu item
