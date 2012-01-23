@@ -22,6 +22,9 @@ $wpclientref;
 /** Install the plugin dependencies upon activation */
 register_activation_hook(__FILE__, array('WPClientReference', 'install'));
 
+/** Remove entries from wp_options when the plugin is uninstalled */
+register_uninstall_hook(__FILE__, array('WPClientReference', 'uninstall'));
+
 /**
  * Instantiate our WPClientReference class
  * @global $wpclientref

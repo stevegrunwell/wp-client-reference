@@ -87,10 +87,12 @@ class WPClientReference {
 
   /**
    * Functions to run when the plugin is uninstalled
-   *
+   * @return void
    */
   public function uninstall(){
-    //delete_option();
+    delete_option('wpclientref_settings');
+    delete_option('_wpclientref_settings_status');
+    return;
   }
 
   /**
