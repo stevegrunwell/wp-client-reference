@@ -6,7 +6,7 @@
  * @version 0.4
  */
 
-$status = $this->get_settings_status();
+$status = $this->get_user_status();
 ?>
 
 <div class="wrap">

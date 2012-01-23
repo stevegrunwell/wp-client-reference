@@ -17,7 +17,6 @@
 require_once dirname(__FILE__) . '/functions.php';
 
 define('WPCLIENTREF_VIEWS_DIR', trailingslashit(dirname(__FILE__)) . 'views/');
-define('WPCLIENTREF_STATUS_KEY_PATTERN', '_wpclientref_settings_%d');
 $wpclientref;
 
 /** Install the plugin dependencies upon activation */

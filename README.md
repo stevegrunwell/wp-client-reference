@@ -18,7 +18,6 @@ TODO:
 * Finish `WPClientReference::get_article_column_content()`
 * Update copy in `WPClientReference::load_settings_view_main()`
 * Ability to remove all WP Client Reference entries in `wp_options` upon uninstall
-* Consolidate the `WPCLIENTREF_STATUS_KEY_PATTERN` entry in wp_options to one entry (rather than one per user)
 * Write readme.txt; validate with [WordPress readme.txt validator](http://wordpress.org/extend/plugins/about/validator/)
 * Fix any outstanding issues in [Github issue tracker](https://github.com/stevegrunwell/WP-Client-Reference/issues/)
 

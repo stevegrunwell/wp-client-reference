@@ -390,33 +390,43 @@ class WPClientReference {
       $status['status'] = true;
       $status['messages'][] = 'Your settings have been saved.';
     }
-    update_option($this->get_settings_status_key(), $status);
+    $this->set_user_status($status);
 
     return $save;
   }
 
   /**
-   * Get the key for the field in wp_options for the status message for the current user
-   * @global WPCLIENTREF_STATUS_KEY_PATTERN
-   * @return str
+   * Set $status in _wpclientref_settings_status for the current user
+   * @param array $status Status from WPClientReference::validate_settings()
+   * @return bool
+   * @uses wp_get_current_user()
+   * @uses get_option()
+   * @uses update_option()
    */
-  public function get_settings_status_key(){
+  protected function set_user_status($status=array()){
     $current_user = wp_get_current_user();
-    return sprintf(WPCLIENTREF_STATUS_KEY_PATTERN, $current_user->ID);
+    $statuses = get_option('_wpclientref_settings_status');
+    if( !$statuses || !is_array($statuses) ){
+      $statuses = array();
+    }
+    $statuses[$current_user->ID] = $status;
+    return update_option('_wpclientref_settings_status', $statuses);
   }
 
   /**
    * Get the status of the update to the plugin settings by this user (WPCLIENTREF_STATUS_KEY_PATTERN)
    * This will also set the row in wp_options to null
-   * @return array
-   * @uses WPClientReference::get_settings_status_key()
+   * @return mixed Either the status array or false
    * @uses get_option()
    * @uses update_option()
+   * @uses wp_get_current_user()
    */
-  public function get_settings_status(){
-    $key = $this->get_settings_status_key();
-    $status = get_option($key);
-    update_option($key, null);
+  public function get_user_status(){
+    $current_user = wp_get_current_user();
+    $statuses = get_option('_wpclientref_settings_status');
+    $status = ( isset($statuses[$current_user->ID]) ? $statuses[$current_user->ID] : false );
+    $statuses[$current_user->ID] = array();
+    update_option('_wpclientref_settings_status', $statuses);
     return $status;
   }
 
