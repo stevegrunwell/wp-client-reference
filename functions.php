@@ -37,8 +37,9 @@ class WPClientReference {
 
     // Optional but it cleans up the "Help Articles" view
     add_filter(sprintf('manage_%s_posts_columns', $this->settings['post_type']), array(&$this, 'set_article_columns'));
-    //add_action('manage_posts_custom_column', array(&$this, 'get_article_column_content'));
+    //add_action('manage_posts_custom_column', array(&$this, 'get_article_column_content'), 10, 2);
 
+    add_action('admin_menu', array(&$this, 'update_post_type_redirect'));
     add_action('admin_menu', array(&$this, 'add_settings_page'));
     add_action('admin_init', array(&$this, 'register_settings'));
 
@@ -88,6 +89,7 @@ class WPClientReference {
   /**
    * Functions to run when the plugin is uninstalled
    * @return void
+   * @uses delete_option()
    */
   public function uninstall(){
     delete_option('wpclientref_settings');
@@ -372,7 +374,8 @@ class WPClientReference {
     } else {
       // If settings[post_type] has changed we need to update the wp_posts table
       if( $save['post_type'] !== $post['post_type'] ){
-        //$this->update_post_type($save['post_type'], $post['post_type']);
+        update_option('_wpclientref_prev_post_type', $save['post_type']);
+        $this->update_post_type($save['post_type'], $post['post_type']);
       }
       $save['post_type'] = $post['post_type'];
     }
@@ -437,6 +440,23 @@ class WPClientReference {
       }
     }
     return false;
+  }
+
+  /**
+   * Redirect the user after successfully changing the settings[post_type]
+   * Read more: https://github.com/stevegrunwell/wp-client-reference/issues/1
+   * @return void
+   * @uses get_option()
+   * @uses delete_option()
+   */
+  public function update_post_type_redirect(){
+    if( $type = get_option('_wpclientref_prev_post_type') ){
+      $url = sprintf('edit.php?post_type=%s&page=wpclientref-settings&settings-updated=true', $this->settings['post_type']);
+      delete_option('_wpclientref_prev_post_type');
+      header("Location: $url");
+      exit;
+    }
+    return;
   }
 
   /**
