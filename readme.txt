@@ -1,4 +1,15 @@
-# WP Client Reference
+=== Plugin Name ===
+Contributors: SteveGrunwell
+Donate link: http://stevegrunwell.com/wp-client-reference
+Tags: help, knowledgebase, client, reference
+Requires at least: 3.3
+Tested up to: 3.3
+Stable tag: 0.4
+
+Create a reference guide for clients right in the WordPress administration area.
+
+
+== Description ==
 
 It's common practice for digital agencies to build a WordPress site/theme then simply hand it off to the client for day-to-day updating. The developers work hard to strike a balance between replicating the designer's vision and making the theme easy for the client to use. As the design becomes more complex the developer faces questions: Will the client remember to wrap this in a `<blockquote>`? Can we count on the content manager remembering to add `class="btn"` to that link?
   
@@ -6,29 +17,16 @@ It can be equally frustrating from the client side. You don't want to deal with 
 
 WP Client Reference attempts to solve these problems by embedding client documentation directly into WordPress. Now agencies can include style guides, tutorials, FAQs, and more without worrying about content managers on the client side not knowing how to format that complicated call-to-action. It's also useful for any type of team to keep track of information (with versioning) right within WordPress.
 
-## Roadmap
 
-**Version 0.4**
+== Frequently Asked Questions ==
 
-* Scheduled to be first public release to WordPress plugin repository
-* Focus on custom post type and basic formatting
+= Can I change the name of the custom post type? =
 
-TODO:
+Yes! If you need to change the name of the custom post type (default is `client_reference`) you can do so in the "Article Options" page. This will also update the posts in `wp_posts` accordingly.
 
-* Finish `WPClientReference::get_article_column_content()`
-* Update copy in `WPClientReference::load_settings_view_main()`
-* Ability to remove all WP Client Reference entries in `wp_options` upon uninstall
-* Write readme.txt; validate with [WordPress readme.txt validator](http://wordpress.org/extend/plugins/about/validator/)
-* Fix any outstanding issues in [Github issue tracker](https://github.com/stevegrunwell/WP-Client-Reference/issues/)
 
-**Version 0.5**
+== Installation ==
 
-* Further emphasis on client-facing view
-* Introduction of custom taxonomies (categories and tags) for articles
-* Search articles
-* Explicitly set who can edit articles custom post type
-* More customization options
-* Internationalization
-* Import/export of articles
-* Customize `WPClientReference::get_breadcrumbs()` output
-* Ability to remove all articles upon uninstall
+1. Upload the `wp-client-reference` plugin directory to `/wp-content/plugins/`
+2. Activate the plugin
+3. (Optional) Adjust the plugin settings on the "Options" page under the "Help Articles" menu item
