@@ -233,6 +233,7 @@ class WPClientReference {
     add_settings_field('hide_menu', 'Hide menu', array(&$this, 'setting_checkbox_hide_menu'), 'wpclientref_settings_page', 'wpclientref_settings_main');
     add_settings_section('wpclientref_settings_advanced', 'Change Custom Post Type', array(&$this, 'load_settings_view_advanced'), 'wpclientref_settings_page');
     add_settings_field('post_type', 'Custom post type', array(&$this, 'setting_text_post_type'), 'wpclientref_settings_page', 'wpclientref_settings_advanced');
+    return;
   }
 
   /**
@@ -266,7 +267,7 @@ class WPClientReference {
     } else if( preg_match('/^setting_checkbox_(.+)/i', $function, $match) ){
       $this->setting_checkbox_input($match['1']);
     } else {
-      trigger_error(sprintf('Invalid method call: WPClientReference::%s', $function), E_USER_WARNING);
+      trigger_error(sprintf('Invalid method call: WPClientReference::%s()', $function), E_USER_WARNING);
     }
     return;
   }
@@ -377,6 +378,10 @@ class WPClientReference {
     } else if( $post['post_type'] == '' ){
       $status['messages'][] = 'Post type cannot be empty';
     } else {
+      // If settings[post_type] has changed we need to update the wp_posts table
+      if( $save['post_type'] !== $post['post_type'] ){
+        //$this->update_post_type($save['post_type'], $post['post_type']);
+      }
       $save['post_type'] = $post['post_type'];
     }
 
@@ -413,6 +418,23 @@ class WPClientReference {
     $status = get_option($key);
     update_option($key, null);
     return $status;
+  }
+
+  /**
+   * Update all posts of type $src to type $dest
+   * @global $wpdb
+   * @param str $src The post type to convert from
+   * @param str $dest The post type to convert to
+   * @return bool
+   */
+  protected function update_post_type($src='', $dest=''){
+    global $wpdb;
+    if( $src != '' && $dest != '' ){
+      if( $wpdb->update($wpdb->prefix . 'posts', array('post_type' => $dest), array('post_type' => $src), '%s') ){
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
