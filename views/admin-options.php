@@ -10,7 +10,7 @@ $status = $this->get_user_status();
 ?>
 
 <div class="wrap">
-  <h2>Help Articles Options</h2>
+  <h2>Article Options</h2>
 
 <?php if( isset($_GET['settings-updated']) && is_array($status) && !empty($status) ): ?>
   <div id="message" class="<?php echo ( $status['status'] ? 'updated' : 'error' ); ?> below-h2">

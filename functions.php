@@ -137,8 +137,8 @@ class WPClientReference {
   public function register_post_type(){
     $args = array(
       'labels' => array(
-        'name' => 'Help Articles',
-        'singular_name' => 'Help Article',
+        'name' => 'Articles',
+        'singular_name' => 'Article',
         'add_new_item' => 'Add New Article',
         'edit_item' => 'Edit Article',
         'new_item' => 'New Article',
@@ -147,7 +147,7 @@ class WPClientReference {
         'not_found_in_trash' => 'No articles found',
         'parent_item_colon' => 'Parent Article'
       ),
-      'description' => 'Help documents',
+      'description' => 'WP Client Reference articles',
       'public' => false,
       'show_ui' => true,
       // TODO: Capabilities
