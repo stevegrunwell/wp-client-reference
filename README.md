@@ -13,8 +13,6 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Scheduled to be first public release to WordPress plugin repository
 * Focus on custom post type and basic formatting
 
-* Fix any outstanding issues in [Github issue tracker](https://github.com/stevegrunwell/WP-Client-Reference/issues/)
-
 **Version 0.5**
 
 * Further emphasis on client-facing view

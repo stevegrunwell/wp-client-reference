@@ -254,6 +254,7 @@ class WPClientReference {
    * @param array $args Any arguments passed to the method
    * @return void
    * @uses WPClientReference::setting_text_input()
+   * @uses WPClientReference::setting_checkbox_input()
    */
   public function __call($function, $args){
     if( preg_match('/^setting_text_(.+)/i', $function, $match) ){
@@ -333,6 +334,8 @@ class WPClientReference {
    * Validate our settings
    * @param array $post POST data
    * @return array
+   * @uses WPClientReference::update_post_type()
+   * @uses WPClientReference::set_user_status()
    * @uses update_option()
    */
   public function validate_settings($post){
@@ -475,7 +478,7 @@ class WPClientReference {
   /**
    * Get a list of all articles
    * @return str
-   * @uses wp_list_pages
+   * @uses wp_list_pages()
    */
   public function list_articles(){
     $opts = array(
@@ -498,6 +501,8 @@ class WPClientReference {
   /**
    * Load scripts and styles for the articles view
    * @return void
+   * @uses wp_enqueue_style()
+   * @uses wp_enqueue_script()
    */
   public function load_scripts_styles(){
     wp_enqueue_style('wpclientref', $this->get_template_url('wpclientref.css'), null, null, 'all');
@@ -537,6 +542,7 @@ class WPClientReference {
    * @param str $file The filename to look for
    * @param bool $path_only Return only the path or include the file at the end?
    * @return str
+   * @uses WPClientReference::load_file_from_theme()
    * @uses trailingslashit()
    */
   protected function get_template_path($file, $path_only=false){
@@ -549,6 +555,7 @@ class WPClientReference {
    * @param str $file The filename to look for
    * @param bool $path_only Return only the path or include the file at the end?
    * @return str
+   * @uses WPClientReference::load_file_from_theme()
    * @uses trailingslashit()
    */
   protected function get_template_url($file, $path_only=false){
