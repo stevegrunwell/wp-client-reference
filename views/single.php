@@ -9,7 +9,7 @@
 setup_postdata($post);
 ?>
 
-<div class="wrap columns-2">
+<div class="wrap columns-2 wpclientref">
   <h2><?php the_title(); ?></h2>
   <?php echo $this->get_breadcrumbs(); ?>
 

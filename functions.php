@@ -45,6 +45,7 @@ class WPClientReference {
 
     add_action('admin_menu', array(&$this, 'register_articles_menu'));
     if( isset($_GET['page']) && $_GET['page'] == 'wpclientref_articles' ){
+      add_filter('get_the_excerpt', array(&$this, 'custom_excerpt'));
       $this->load_scripts_styles();
     }
     return;
@@ -156,6 +157,7 @@ class WPClientReference {
       'show_ui' => true,
       // TODO: Capabilities
       'hierarchical' => true,
+      'rewrite' => false,
       'supports' => array('title', 'editor', 'author', 'excerpt', 'revisions', 'page-attributes'),
       'taxonomies' => array('wpclientref_category', 'wpclientref_tag'),
       'can_export' => true
@@ -476,8 +478,38 @@ class WPClientReference {
   }
 
   /**
+   * Get articles for display (with optional filters)
+   * @return array
+   */
+  public function get_articles($args=array()){
+    $opts = array(
+      'post_type' => $this->settings['post_type'],
+      'sort_column' => 'menu_order',
+      'sort_order' => 'ASC',
+      'hierarchical' => true,
+      'parent' => 0,
+      'number' => 10,
+      'offset' => 0,
+
+    );
+    $opts = array_merge($opts, $args);
+    return get_pages($opts);
+  }
+
+  /**
+   * Get the article's permalink within the context of the admin area
+   * @param int $id The article ID
+   * @return str
+   * @uses admin_url()
+   */
+  public function article_permalink($id){
+    return admin_url(sprintf('admin.php?page=wpclientref_articles&article_id=%d', $id));
+  }
+
+  /**
    * Get a list of all articles
    * @return str
+   * @uses WPClientReference::article_permalink()
    * @uses wp_list_pages()
    */
   public function list_articles(){
@@ -492,10 +524,20 @@ class WPClientReference {
     // This is awfully hackish but replace the links to stay in the admin area
     if( preg_match_all('/\<li.+page-item-([0-9]+).+href="(.[^"]+)"/i', $pages, $matches) ){
       foreach( $matches['2'] as $k=>$v ){
-        $pages = str_replace(sprintf('"%s"', $v), sprintf('?page=wpclientref_articles&article_id=%d', $matches['1'][$k]), $pages);
+        $pages = str_replace(sprintf('"%s"', $v), $this->article_permalink($matches['1'][$k]), $pages);
       }
     }
     return $pages;
+  }
+
+  /**
+   * Output custom excerpts (mainly here to bypass other filters for "continue reading" style links
+   * @param str $excerpt The excerpt text to be filtered
+   * @return str
+   */
+  public function custom_excerpt($excerpt){
+    global $post;
+    return str_replace(get_permalink(), $this->article_permalink($post->ID), $excerpt);
   }
 
   /**

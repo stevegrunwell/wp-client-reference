@@ -7,7 +7,7 @@
  */
 ?>
 
-<div class="wrap columns-2">
+<div class="wrap columns-2 wpclientref">
   <h2><?php echo $this->settings['menu_page_title']; ?></h2>
 
   <div id="poststuff" class="metabox-holder has-right-sidebar">
@@ -16,7 +16,14 @@
 
     <div id="post-body">
       <div id="post-body-content">
-        <p>Foo bar</p>
+      <?php foreach( $this->get_articles() as $post ): setup_postdata($post); ?>
+
+        <div class="article">
+          <h3><a href="<?php echo $this->article_permalink($post->ID); ?>"><?php the_title(); ?></a></h3>
+          <?php the_excerpt(); ?>
+        </div>
+
+      <?php endforeach; ?>
       </div>
     </div>
 
