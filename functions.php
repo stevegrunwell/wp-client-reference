@@ -472,7 +472,6 @@ class WPClientReference {
   public function register_articles_menu(){
     if( !$this->settings['hide_menu'] ){
       add_menu_page('Help', $this->settings['menu_page_title'], 'edit_posts', 'wpclientref_articles', array(&$this, 'load_template'), '', $this->settings['menu_position']);
-      //add_submenu_page('wpclientref_articles', 'Help', 'Help Articles', 'edit_posts', 'wpclientref_articles', array(&$this, 'load_front_page'));
     }
     return;
   }
@@ -480,6 +479,7 @@ class WPClientReference {
   /**
    * Get articles for display (with optional filters)
    * @return array
+   * @uses get_pages()
    */
   public function get_articles($args=array()){
     $opts = array(
@@ -532,8 +532,11 @@ class WPClientReference {
 
   /**
    * Output custom excerpts (mainly here to bypass other filters for "continue reading" style links
+   * @global $post
    * @param str $excerpt The excerpt text to be filtered
    * @return str
+   * @uses WPClientReference::article_permalink()
+   * @uses get_permalink()
    */
   public function custom_excerpt($excerpt){
     global $post;
@@ -555,6 +558,7 @@ class WPClientReference {
   /**
    * View controller
    * @return void
+   * @uses WPClientReference::get_template_path()
    * @uses get_post()
    */
   public function load_template(){
@@ -598,6 +602,8 @@ class WPClientReference {
    * @param bool $path_only Return only the path or include the file at the end?
    * @return str
    * @uses WPClientReference::load_file_from_theme()
+   * @uses get_bloginfo()
+   * @uses plugins_url()
    * @uses trailingslashit()
    */
   protected function get_template_url($file, $path_only=false){
