@@ -25,5 +25,6 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Customize `WPClientReference::get_breadcrumbs()` output
 * Ability to remove all articles upon uninstall
 * Customize the columns in the article list (`WPClientReference::get_article_column_content()`)
+* Better handling of permalinks within the admin area
 * Better navigation in the default article theme
 * Ability to set an article as the front page of the articles viewer instead of looping through top-level articles
