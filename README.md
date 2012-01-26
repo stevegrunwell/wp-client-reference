@@ -13,7 +13,7 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Scheduled to be first public release to WordPress plugin repository
 * Focus on custom post type and basic formatting
 
-**Version 0.5**
+**Version 0.5 and Beyond**
 
 * Further emphasis on client-facing view
 * Introduction of custom taxonomies (categories and tags) for articles
@@ -28,3 +28,6 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Better handling of permalinks within the admin area
 * Better navigation in the default article theme
 * Ability to set an article as the front page of the articles viewer instead of looping through top-level articles
+* Integrate the articles with the WordPress contextual help menu
+* Better copywriting!
+* Conform to the WordPress coding standards (Oh, the extra whitespace!)
