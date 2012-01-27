@@ -10,7 +10,7 @@ WP Client Reference attempts to solve these problems by embedding client documen
 
 **Version 0.4**
 
-* Scheduled to be first public release to WordPress plugin repository
+* First public release to WordPress plugin repository
 * Focus on custom post type and basic formatting
 
 **Version 0.5 and Beyond**
