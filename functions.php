@@ -66,7 +66,7 @@ class WPClientReference {
     return array(
       'hide_menu' => 0,
       'menu_page_title' => 'Knowledgebase',
-      'menu_position' => 70,
+      'menu_position' => 71,
       'post_type' => 'client_reference'
     );
   }
