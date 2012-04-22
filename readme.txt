@@ -4,7 +4,7 @@ Donate link: http://stevegrunwell.com/wp-client-reference
 Tags: help, knowledgebase, client, reference
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 0.4
+Stable tag: 0.41
 
 Create a reference guide for clients right in the WordPress administration area.
 
@@ -34,3 +34,18 @@ WP Client Reference looks for a `wpclientref-views` directory in your current th
 = Can I change the name of the custom post type? =
 
 Yes! If you need to change the name of the custom post type (default is `client_reference`) you can do so in the "Article Options" page. This will also update the posts in `wp_posts` accordingly.
+
+= Why has the Knowledgebase replaced my Users menu? =
+
+Version 0.4 of the plugin used menu position 70 as its default, which is normally occupied by the Users menu. It's been patched in version 0.41 but any users who installed pre-0.41 should manually change the menu position (Articles > Options) to a position not occupied by a native WordPress menu (71 is the new default for WP Client Reference).
+
+
+== Changelog ==
+
+= 0.41 =
+* Fixed issue with default 'Knowledgebase' position preventing access to Users menu (special thanks to duckgoesoink)
+
+
+== Special Thanks ==
+
+Thank you to duckgoesoink for catching the Knowledgebase/User conflict fixed in 0.41.
