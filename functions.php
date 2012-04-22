@@ -246,7 +246,7 @@ class WPClientReference {
    * @return void
    */
   public function load_settings_view_advanced(){
-    echo sprintf('<p>If there are collisions with the custom post type of <code>%s</code> you can change it here:</p>', $this->settings['post_type']);
+    printf('<p>If there are collisions with the custom post type of <code>%s</code> you can change it here:</p>', $this->settings['post_type']);
     return;
   }
 
@@ -280,7 +280,7 @@ class WPClientReference {
    * @return void
    */
   public function setting_text_input($key, $args=array()){
-    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="text" value="%s" class="%s" />', $key, $key, $this->settings[$key], ( isset($args['class']) ? $args['class'] : '' ));
+    printf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="text" value="%s" class="%s" />', $key, $key, $this->settings[$key], ( isset($args['class']) ? $args['class'] : '' ));
     return;
   }
 
@@ -299,9 +299,9 @@ class WPClientReference {
     if( isset($args['label']) && $args['label'] != '' ){
       echo '<label>';
     }
-    echo sprintf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="checkbox" value="1" class="%s" %s />', $key, $key, ( isset($args['class']) ? $args['class'] : '' ), ( isset($this->settings[$key]) && $this->settings[$key] ? 'checked="checked"' : '' ));
+    printf('<input name="wpclientref_settings[%s]" id="wpclientref_settings[%s]" type="checkbox" value="1" class="%s" %s />', $key, $key, ( isset($args['class']) ? $args['class'] : '' ), ( isset($this->settings[$key]) && $this->settings[$key] ? 'checked="checked"' : '' ));
     if( isset($args['label']) && $args['label'] != '' ){
-      echo sprintf(' %s</label>', $args['label']);
+      printf(' %s</label>', $args['label']);
     }
     return;
   }
