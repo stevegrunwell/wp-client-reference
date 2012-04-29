@@ -3,7 +3,7 @@
  * Plugin Name: WP Client Reference
  * Plugin URI: http://stevegrunwell.com/wp-client-reference
  * Description: Create a reference guide for clients right in the WordPress administration area
- * Version: 0.4
+ * Version: 0.41
  * Author: Steve Grunwell
  * Author URI: http://stevegrunwell.com
  * License: GPL2
