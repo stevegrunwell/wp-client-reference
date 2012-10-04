@@ -550,7 +550,7 @@ class WPClientReference {
    * @uses wp_enqueue_script()
    */
   public function load_scripts_styles(){
-    wp_enqueue_style('wpclientref', $this->get_template_url('wpclientref.css'), null, null, 'all');
+    wp_enqueue_style('wpclientref', $this->get_template_url('wpclientref-views/wpclientref.css'), null, null, 'all');
     wp_enqueue_script('post');
     return;
   }
