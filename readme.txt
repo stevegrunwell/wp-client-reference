@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: SteveGrunwell
+Contributors: stevegrunwell, VanPattenMedia
 Donate link: http://stevegrunwell.com/wp-client-reference
 Tags: help, knowledgebase, client, reference
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 0.41
+Stable tag: 0.42
 
 Create a reference guide for clients right in the WordPress administration area.
 
@@ -41,6 +41,9 @@ Version 0.4 of the plugin used menu position 70 as its default, which is normall
 
 
 == Changelog ==
+
+= 0.42 =
+* Fixed path issues with `WPClientReference::get_template_url()` when loading static assets from {THEME}/wpclientref-views/ (Issue #3). Special thanks to Chris VanPatten for tracking this down!
 
 = 0.41 =
 * Fixed issue with default 'Knowledgebase' position preventing access to Users menu (special thanks to duckgoesoink)

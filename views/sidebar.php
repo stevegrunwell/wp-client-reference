@@ -3,7 +3,7 @@
  * @author Steve Grunwell <stevegrunwell@gmail.com>
  * @package WordPress
  * @subpackage WP Client Reference
- * @version 0.4
+ * @version 0.42
  */
 ?>
 

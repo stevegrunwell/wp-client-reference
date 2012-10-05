@@ -17,6 +17,11 @@ WP Client Reference attempts to solve these problems by embedding client documen
 
 * Fixed issue #2
 
+**Version 0.42**
+
+* Fixed issue #3
+* Added @ChrisVanPatten as a collaborator
+
 **Version 0.5 and Beyond**
 
 * Further emphasis on client-facing view
