@@ -607,7 +607,7 @@ class WPClientReference {
    * @uses trailingslashit()
    */
   protected function get_template_url($file, $path_only=false){
-    return trailingslashit(( $this->load_file_from_theme($file) ? get_bloginfo('template_url') : plugins_url(null, __FILE__) . '/views/' )) . ( $path_only ? '' : $file );
+    return trailingslashit(( $this->load_file_from_theme($file) ? trailingslashit(get_bloginfo('template_url')) . 'wpclientref-views/' : plugins_url(null, __FILE__) . '/views/' )) . ( $path_only ? '' : $file );
   }
 
   /**
