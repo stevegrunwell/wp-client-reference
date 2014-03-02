@@ -27,6 +27,12 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Major refactor of the `WP_Client_Reference` class
 * Use dashicons (WordPress 3.8+) for the Articles and Knowledgebase menus
 
+#### Planned
+
+* Sorting in the post list
+* Re-work templates to work with the more responsive WordPress admin area
+* Internationalization
+
 ### Version 0.6 and Beyond
 
 * Further emphasis on client-facing view
@@ -35,7 +41,6 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Search articles
 * Explicitly set who can edit articles custom post type
 * More customization options
-* Internationalization
 * Import/export of articles
 * Customize `WPClientReference::get_breadcrumbs()` output
 * Ability to remove all articles upon uninstall
@@ -45,4 +50,3 @@ WP Client Reference attempts to solve these problems by embedding client documen
 * Ability to set an article as the front page of the articles viewer instead of looping through top-level articles
 * Integrate the articles with the WordPress contextual help menu
 * Better copywriting!
-* Conform to the WordPress coding standards (Oh, the extra whitespace!)

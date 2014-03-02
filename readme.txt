@@ -3,7 +3,7 @@ Contributors: stevegrunwell, VanPattenMedia
 Donate link: http://stevegrunwell.com/wp-client-reference
 Tags: help, knowledgebase, client, reference
 Requires at least: 3.3
-Tested up to: 3.3
+Tested up to: 3.8.1
 Stable tag: 0.42
 
 Create a reference guide for clients right in the WordPress administration area.
