@@ -29,19 +29,16 @@ WP Client Reference attempts to solve these problems by embedding client documen
 
 #### Planned
 
-* Sorting in the post list
-* Re-work templates to work with the more responsive WordPress admin area
-* Internationalization
+* Sorting in the post list (Github issue #6)
+* Re-work templates to work with the more responsive WordPress admin area (Github issue #5)
+* Internationalization (Github issue #4)
 
 ### Version 0.6 and Beyond
 
 * Further emphasis on client-facing view
-* Introduction of custom taxonomies (categories and tags) for articles
-* Sorting in the post list
+* Introduction of custom taxonomies (categories and tags) for articles (Github issue #7)
 * Search articles
 * Explicitly set who can edit articles custom post type
-* More customization options
-* Import/export of articles
 * Customize `WPClientReference::get_breadcrumbs()` output
 * Ability to remove all articles upon uninstall
 * Customize the columns in the article list (`WPClientReference::get_article_column_content()`)
