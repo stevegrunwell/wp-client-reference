@@ -324,7 +324,7 @@ class WP_Client_Reference {
         'edit_posts',
         'wpclientref_articles',
         array( &$this, 'load_template' ),
-        null,
+        'dashicons-editor-help',
         $this->settings['menu_position']
       );
     }
@@ -633,6 +633,7 @@ class WP_Client_Reference {
       'description' => __( 'WP Client Reference articles', 'wpclientref' ),
       'public' => false,
       'show_ui' => true,
+      'menu_icon' => 'dashicons-admin-page',
       'hierarchical' => true,
       'rewrite' => false,
       'supports' => array( 'title', 'editor', 'author', 'excerpt', 'revisions', 'page-attributes' ),

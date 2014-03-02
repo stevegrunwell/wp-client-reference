@@ -44,6 +44,7 @@ Version 0.4 of the plugin used menu position 70 as its default, which is normall
 
 = 0.5 =
 * Major refactor of the `WP_Client_Reference` class
+* Use dashicons (WordPress 3.8+) for the Articles and Knowledgebase menus
 
 = 0.42 =
 * Fixed path issues with `WPClientReference::get_template_url()` when loading static assets from {THEME}/wpclientref-views/ (Issue #3). Special thanks to Chris VanPatten for tracking this down!

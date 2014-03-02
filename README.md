@@ -25,8 +25,9 @@ WP Client Reference attempts to solve these problems by embedding client documen
 ### Version 0.5
 
 * Major refactor of the `WP_Client_Reference` class
+* Use dashicons (WordPress 3.8+) for the Articles and Knowledgebase menus
 
-**Version 0.5 and Beyond**
+### Version 0.6 and Beyond
 
 * Further emphasis on client-facing view
 * Introduction of custom taxonomies (categories and tags) for articles
