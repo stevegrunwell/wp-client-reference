@@ -8,24 +8,29 @@ WP Client Reference attempts to solve these problems by embedding client documen
 
 ## Roadmap
 
-**Version 0.4**
+### Version 0.4
 
 * First public release to WordPress plugin repository
 * Focus on custom post type and basic formatting
 
-**Version 0.41**
+### Version 0.41
 
 * Fixed issue #2
 
-**Version 0.42**
+### Version 0.42
 
 * Fixed issue #3
 * Added @ChrisVanPatten as a collaborator
+
+### Version 0.5
+
+* Major refactor of the `WP_Client_Reference` class
 
 **Version 0.5 and Beyond**
 
 * Further emphasis on client-facing view
 * Introduction of custom taxonomies (categories and tags) for articles
+* Sorting in the post list
 * Search articles
 * Explicitly set who can edit articles custom post type
 * More customization options

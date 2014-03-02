@@ -1,8 +1,21 @@
 /**
+ * Styles for WP Client Reference
+ *
  * @package WordPress
  * @subpackage WP Client Reference
  * @version 0.42
  */
 
-.tableofcontents .children li{margin-left:1.4em; list-style-type:square;}
-.wrap.wpclientref #poststuff .article h3{padding-left:0;}
+.tableofcontents .children li {
+  margin-left: 1.4em;
+  list-style-type: disc;
+}
+.wrap.wpclientref #poststuff .article h3 {
+  padding-left: 0;
+}
+
+.wrap.wpclientref .breadcrumbs li + li:before {
+  content: '\00bb\00a0';
+  display: inline-block;
+  padding: 0 .2em;
+}
